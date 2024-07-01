@@ -3,6 +3,7 @@ name: Run Python Script
 on:
   schedule:
     - cron: '30 23 * * 6'  # Every Saturday at 11:30 PM
+  workflow_dispatch:
 
 jobs:
   build:
