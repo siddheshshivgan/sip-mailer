@@ -2,7 +2,7 @@ name: Run Python Script
 
 on:
   schedule:
-    - cron: '0 23 * * 6'  # Every Saturday at 11 PM
+    - cron: '30 23 * * 6'  # Every Saturday at 11:30 PM
 
 jobs:
   build:
@@ -18,5 +18,16 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Set environment variables
+      run: |
+        echo EMAIL_ID=${{ secrets.EMAIL_ID }} >> $GITHUB_ENV
+        echo PASSWORD=${{ secrets.PASSWORD }} >> $GITHUB_ENV
+        echo PARTNER_DESK=${{ secrets.PARTNER_DESK }} >> $GITHUB_ENV
+        echo SID_ID=${{ secrets.SID_ID }} >> $GITHUB_ENV
+        echo SID_PASSWORD=${{ secrets.SID_PASSWORD }} >> $GITHUB_ENV
+        echo RAJAN_ID=${{ secrets.RAJAN_ID }} >> $GITHUB_ENV
+        echo RAJAN_PASSWORD=${{ secrets.RAJAN_PASSWORD }} >> $GITHUB_ENV
+        echo RESHMA_ID=${{ secrets.RESHMA_ID }} >> $GITHUB_ENV
+        echo RESHMA_PASSWORD=${{ secrets.RESHMA_PASSWORD }} >> $GITHUB_ENV
     - name: Run script
       run: python sip-mailer.py
