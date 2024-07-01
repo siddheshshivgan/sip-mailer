@@ -1,4 +1,8 @@
-pandas==1.2.4
-Pillow==10.3.0
-pytesseract==0.3.10
-selenium==4.22.0
+pandas
+Pillow
+pytesseract
+selenium
+openpyxl
+xlrd
+
+
