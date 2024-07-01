@@ -78,10 +78,10 @@ accounts = [
     }
 ]
 
-for acc in accounts:
-    # Navigate to the login page
-    driver.get(os.getenv('PARTNER_DESK'))
+# Navigate to the login page
+driver.get(os.getenv('PARTNER_DESK'))
 
+for acc in accounts:
     # Locate the username and password fields and enter the login details
     username = driver.find_element(By.NAME, 'partnerId1')
     password = driver.find_element(By.NAME, 'password1')
@@ -129,7 +129,6 @@ for acc in accounts:
 
     WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.ID, 'export_xls'))).click()
     time.sleep(2)
-    driver.quit()
 
     # Load the sheets from the provided files
     latest_xls_files = get_latest_xls_files(num_files=2)
@@ -221,7 +220,11 @@ for acc in accounts:
         # Send the email
         # send_email(to_address, subject, body)
         print("Email sent to ",investor)
+    
+    driver.close()
+    driver.switch_to.window(driver.window_handles[0])
+    driver.get(os.getenv('PARTNER_DESK'))
 
 
-
+driver.quit()
 
