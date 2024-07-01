@@ -4,6 +4,7 @@ from email.mime.text import MIMEText
 from email.utils import formataddr
 import glob
 import os
+from pathlib import Path
 import smtplib
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -15,6 +16,11 @@ import pytesseract
 import time
 import pandas as pd
 
+# Get the home directory
+home_dir = Path.home()
+
+# Construct the path to the Downloads folder
+downloads_dir = home_dir / "Downloads"
 
 # Set up your Tesseract OCR path if it's not in your PATH environment variable
 pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files/Tesseract-OCR/tesseract.exe'
@@ -46,7 +52,7 @@ def send_email(to_address, subject, body):
 # Function to get xls file paths
 def get_latest_xls_files(num_files=2):
     # Construct the path to the Downloads folder
-    downloads_path = os.path.expanduser('C:/Users/HP/Downloads')
+    downloads_path = os.path.expanduser(downloads_dir)
 
     # Search for .xls files in the Downloads folder
     search_pattern = os.path.join(downloads_path, '*.xls')
@@ -128,7 +134,7 @@ for acc in accounts:
             break
 
     WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.ID, 'export_xls'))).click()
-    time.sleep(2)
+    time.sleep(5)
 
     # Load the sheets from the provided files
     latest_xls_files = get_latest_xls_files(num_files=2)
@@ -165,7 +171,7 @@ for acc in accounts:
     merged_sheet = merged_sheet[(merged_sheet['SIP Submission Date'] >= start_date) & (merged_sheet['SIP Submission Date'] <= end_date)]
 
     # Save the merged sheet to a new file
-    output_path = 'C:/Users/HP/Downloads/merged_sheet.xlsx'
+    output_path = downloads_dir /'merged_sheet.xlsx'
     merged_sheet.to_excel(output_path, index=False)
     # merged_sheet = pd.read_excel(output_path)
 
