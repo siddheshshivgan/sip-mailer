@@ -37,4 +37,4 @@ jobs:
         echo RESHMA_ID=${{ secrets.RESHMA_ID }} >> $GITHUB_ENV
         echo RESHMA_PASSWORD=${{ secrets.RESHMA_PASSWORD }} >> $GITHUB_ENV
     - name: Run script
-      run: python sip-mailer.py
+      run: python sip_mailer.py
