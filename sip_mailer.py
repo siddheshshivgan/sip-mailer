@@ -85,7 +85,7 @@ accounts = [
 ]
 
 # Navigate to the login page
-driver.get(os.getenv('PARTNER_DESK'))
+driver.get("https://www.njindiaonline.in/pdesk/login.fin?cmdAction=login")
 
 for acc in accounts:
     # Locate the username and password fields and enter the login details
