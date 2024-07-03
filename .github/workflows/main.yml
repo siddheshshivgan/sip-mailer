@@ -45,8 +45,8 @@ jobs:
         RESHMA_PASSWORD: ${{ secrets.RESHMA_PASSWORD }}
       shell: cmd
       run: |
-          example-command "%EMAIL_ID%"
-          example-command "%PASSWORD%"
+          "%EMAIL_ID%"
+          "%PASSWORD%"
           
     - name: Run script
       run: python sip_mailer.py
