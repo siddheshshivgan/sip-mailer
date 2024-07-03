@@ -34,14 +34,14 @@ jobs:
         
     - name: Set environment variables
       run: |
-        echo EMAIL_ID=${{ secrets.EMAIL_ID }} >> $GITHUB_ENV
-        echo PASSWORD=${{ secrets.PASSWORD }} >> $GITHUB_ENV
-        echo PARTNER_DESK=${{ secrets.PARTNER_DESK }} >> $GITHUB_ENV
-        echo SID_ID=${{ secrets.SID_ID }} >> $GITHUB_ENV
-        echo SID_PASSWORD=${{ secrets.SID_PASSWORD }} >> $GITHUB_ENV
-        echo RAJAN_ID=${{ secrets.RAJAN_ID }} >> $GITHUB_ENV
-        echo RAJAN_PASSWORD=${{ secrets.RAJAN_PASSWORD }} >> $GITHUB_ENV
-        echo RESHMA_ID=${{ secrets.RESHMA_ID }} >> $GITHUB_ENV
-        echo RESHMA_PASSWORD=${{ secrets.RESHMA_PASSWORD }} >> $GITHUB_ENV
+        echo EMAIL_ID=${{ secrets.EMAIL_ID }}
+        echo PASSWORD=${{ secrets.PASSWORD }}
+        echo PARTNER_DESK=${{ secrets.PARTNER_DESK }}
+        echo SID_ID=${{ secrets.SID_ID }}
+        echo SID_PASSWORD=${{ secrets.SID_PASSWORD }}
+        echo RAJAN_ID=${{ secrets.RAJAN_ID }}
+        echo RAJAN_PASSWORD=${{ secrets.RAJAN_PASSWORD }}
+        echo RESHMA_ID=${{ secrets.RESHMA_ID }}
+        echo RESHMA_PASSWORD=${{ secrets.RESHMA_PASSWORD }}
     - name: Run script
       run: python sip_mailer.py
