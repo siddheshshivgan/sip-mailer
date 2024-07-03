@@ -33,15 +33,16 @@ jobs:
         python -m pip install -r requirements.txt
         
     - name: Set environment variables
-      run: |
-        echo EMAIL_ID=${{ secrets.EMAIL_ID }}
-        echo PASSWORD=${{ secrets.PASSWORD }}
-        echo PARTNER_DESK=${{ secrets.PARTNER_DESK }}
-        echo SID_ID=${{ secrets.SID_ID }}
-        echo SID_PASSWORD=${{ secrets.SID_PASSWORD }}
-        echo RAJAN_ID=${{ secrets.RAJAN_ID }}
-        echo RAJAN_PASSWORD=${{ secrets.RAJAN_PASSWORD }}
-        echo RESHMA_ID=${{ secrets.RESHMA_ID }}
-        echo RESHMA_PASSWORD=${{ secrets.RESHMA_PASSWORD }}
+      env: 
+        EMAIL_ID: ${{ secrets.EMAIL_ID }}
+        PASSWORD: ${{ secrets.PASSWORD }}
+        PARTNER_DESK: ${{ secrets.PARTNER_DESK }}
+        SID_ID: ${{ secrets.SID_ID }}
+        SID_PASSWORD: ${{ secrets.SID_PASSWORD }}
+        RAJAN_ID: ${{ secrets.RAJAN_ID }}
+        RAJAN_PASSWORD: ${{ secrets.RAJAN_PASSWORD }}
+        RESHMA_ID: ${{ secrets.RESHMA_ID }}
+        RESHMA_PASSWORD: ${{ secrets.RESHMA_PASSWORD }}
+        
     - name: Run script
       run: python sip_mailer.py
