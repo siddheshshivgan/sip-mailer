@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    environment: Deployment
 
     steps:
     - uses: actions/checkout@v2
