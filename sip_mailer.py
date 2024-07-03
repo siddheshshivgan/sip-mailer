@@ -72,16 +72,16 @@ accounts = [
         "id": os.getenv('SID_ID'),
         "password": os.getenv('SID_PASSWORD')
     },
-    {
-        "name": "RAJAN",
-        "id": os.getenv('RAJAN_ID'),
-        "password": os.getenv('RAJAN_PASSWORD')
-    },
-    {
-        "name": "RESHMA",
-        "id": os.getenv('RESHMA_ID'),
-        "password": os.getenv('RESHMA_PASSWORD')
-    }
+    # {
+    #     "name": "RAJAN",
+    #     "id": os.getenv('RAJAN_ID'),
+    #     "password": os.getenv('RAJAN_PASSWORD')
+    # },
+    # {
+    #     "name": "RESHMA",
+    #     "id": os.getenv('RESHMA_ID'),
+    #     "password": os.getenv('RESHMA_PASSWORD')
+    # }
 ]
 
 # Navigate to the login page
@@ -91,7 +91,7 @@ for acc in accounts:
     # Locate the username and password fields and enter the login details
     username = driver.find_element(By.NAME, 'partnerId1')
     password = driver.find_element(By.NAME, 'password1')
-    username.send_keys(acc['id'])
+    username.send_keys('30756')
     password.send_keys(acc['password'])
 
     # Capture the CAPTCHA image
