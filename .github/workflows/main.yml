@@ -43,17 +43,10 @@ jobs:
         RAJAN_PASSWORD: ${{ secrets.RAJAN_PASSWORD }}
         RESHMA_ID: ${{ secrets.RESHMA_ID }}
         RESHMA_PASSWORD: ${{ secrets.RESHMA_PASSWORD }}
+      shell: cmd
       run: |
-          echo ${EMAIL_ID}
-          echo ${PASSWORD}
-          echo ${PARTNER_DESK}
-          echo ${SID_ID}
-          echo ${SID_PASSWORD}
-          echo ${RAJAN_ID}
-          echo ${RAJAN_PASSWORD}
-          echo ${RESHMA_ID}
-          echo ${RESHMA_PASSWORD}
-          os.getenv("EMAIL_ID")
+          example-command "%EMAIL_ID%"
+          example-command "%PASSWORD%"
           
     - name: Run script
       run: python sip_mailer.py
