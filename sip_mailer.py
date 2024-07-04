@@ -125,8 +125,9 @@ for acc in accounts:
     captcha_field.send_keys(captcha_text)
 
     # Submit the form
-    driver.find_element(By.NAME, 'action').click()
-    WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.NAME, 'action'))).click()
+    # driver.find_element(By.NAME, 'action').click()
+    time.sleep(2)
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, 'action'))).click()
     time.sleep(5)
     WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//a[text()="Stock Exchange"]'))).click()
     # driver.find_element(By.XPATH, '//a[text()="Stock Exchange"]').click()
