@@ -140,7 +140,9 @@ for acc in accounts:
     time.sleep(5)
     driver.execute_script("window.history.go(-1)")
     time.sleep(3)
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located(By.XPATH, "//a[@onclick='javascript:getAccountDetail();']")).click()
+    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//a[@onclick='javascript:getAccountDetail();']")))
+    element.click()
+    # WebDriverWait(driver, 10).until(EC.presence_of_element_located(By.XPATH, "//a[@onclick='javascript:getAccountDetail();']")).click()
 
     # Get the current window handle
     original_window = driver.current_window_handle
