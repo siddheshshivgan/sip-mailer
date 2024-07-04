@@ -94,9 +94,9 @@ for acc in accounts:
     username.send_keys(str(os.environ.get('SID_ID')))
     password.send_keys(str(os.environ.get('SID_PASSWORD')))
 
-    print(driver.find_element(By.NAME, 'partnerId1'))
+    print(driver.find_element(By.NAME, 'partnerId1').text)
     sys.stdout.flush()
-    print(driver.find_element(By.NAME, 'password1'))
+    print(driver.find_element(By.NAME, 'password1').text)
     sys.stdout.flush()
     
     # Capture the CAPTCHA image
