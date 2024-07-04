@@ -69,8 +69,8 @@ def get_latest_xls_files(num_files=2):
 accounts = [
     {
         "name": "SID",
-        "id": os.getenv('SID_ID'),
-        "password": os.getenv('SID_PASSWORD')
+        "id": os.environ.get('SID_ID'),
+        "password": os.environ.get('SID_PASSWORD')
     },
     # {
     #     "name": "RAJAN",
