@@ -43,10 +43,10 @@ jobs:
         RAJAN_PASSWORD: ${{ secrets.RAJAN_PASSWORD }}
         RESHMA_ID: ${{ secrets.RESHMA_ID }}
         RESHMA_PASSWORD: ${{ secrets.RESHMA_PASSWORD }}
-      shell: cmd
+    - name: Print secrets (for debugging)
       run: |
-          "%EMAIL_ID%"
-          "%PASSWORD%"
+        echo "EMAIL_ID: ${{ secrets.EMAIL_ID }}"
+        echo "PASSWORD: ${{ secrets.PASSWORD }}"
           
     - name: Run script
       run: python sip_mailer.py
