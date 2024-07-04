@@ -30,8 +30,8 @@ driver = webdriver.Chrome()
 
 # Function to send email
 def send_email(to_address, subject, body):
-    from_address = os.getenv('EMAIL_ID')
-    app_password = os.getenv('PASSWORD')
+    from_address = os.environ.get('EMAIL_ID')
+    app_password = os.environ.get('PASSWORD')
 
     # Set up the server
     server = smtplib.SMTP(host='smtp.gmail.com', port=587)
@@ -74,13 +74,13 @@ accounts = [
     },
     # {
     #     "name": "RAJAN",
-    #     "id": os.getenv('RAJAN_ID'),
-    #     "password": os.getenv('RAJAN_PASSWORD')
+    #     "id": os.environ.get('RAJAN_ID'),
+    #     "password": os.environ.get('RAJAN_PASSWORD')
     # },
     # {
     #     "name": "RESHMA",
-    #     "id": os.getenv('RESHMA_ID'),
-    #     "password": os.getenv('RESHMA_PASSWORD')
+    #     "id": os.environ.get('RESHMA_ID'),
+    #     "password": os.environ.get('RESHMA_PASSWORD')
     # }
 ]
 
@@ -91,8 +91,8 @@ for acc in accounts:
     # Locate the username and password fields and enter the login details
     username = driver.find_element(By.NAME, 'partnerId1')
     password = driver.find_element(By.NAME, 'password1')
-    username.send_keys('30756')
-    password.send_keys(acc['password'])
+    username.send_keys(str(os.environ.get('SID_ID')))
+    password.send_keys(str(os.environ.get('SID_PASSWORD')))
 
     # Capture the CAPTCHA image
     captcha_image = driver.find_element(By.ID, 'imgCaptcha')  # Update the XPath
@@ -229,7 +229,7 @@ for acc in accounts:
     
     driver.close()
     driver.switch_to.window(driver.window_handles[0])
-    driver.get(os.getenv('PARTNER_DESK'))
+    driver.get(os.environ.get('PARTNER_DESK'))
 
 
 driver.quit()
