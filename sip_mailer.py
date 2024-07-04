@@ -145,7 +145,7 @@ for acc in accounts:
     original_window = driver.current_window_handle
 
     # Wait for the new window or tab
-    WebDriverWait(driver, 3).until(EC.number_of_windows_to_be(2))
+    WebDriverWait(driver, 10).until(EC.number_of_windows_to_be(2))
 
     # Loop through until we find a new window handle
     for window_handle in driver.window_handles:
@@ -153,7 +153,7 @@ for acc in accounts:
             driver.switch_to.window(window_handle)
             break
 
-    WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.ID, 'export_xls'))).click()
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'export_xls'))).click()
     time.sleep(5)
     
     # Load the sheets from the provided files
