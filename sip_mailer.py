@@ -137,9 +137,10 @@ for acc in accounts:
     time.sleep(3)
     driver.find_element(By.ID, 'export_xls').click()
 
+    time.sleep(5)
     driver.execute_script("window.history.go(-1)")
-    time.sleep(2)
-    driver.find_element(By.XPATH, "//a[@onclick='javascript:getAccountDetail();']").click()
+    time.sleep(3)
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located(By.XPATH, "//a[@onclick='javascript:getAccountDetail();']")).click()
 
     # Get the current window handle
     original_window = driver.current_window_handle
