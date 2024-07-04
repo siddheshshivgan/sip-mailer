@@ -8,12 +8,8 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: Set environment variables
-      env: 
+
+    env: 
         EMAIL_ID: ${{ secrets.EMAIL_ID }}
         PASSWORD: ${{ secrets.PASSWORD }}
         PARTNER_DESK: ${{ secrets.PARTNER_DESK }}
@@ -23,8 +19,13 @@ jobs:
         RAJAN_PASSWORD: ${{ secrets.RAJAN_PASSWORD }}
         RESHMA_ID: ${{ secrets.RESHMA_ID }}
         RESHMA_PASSWORD: ${{ secrets.RESHMA_PASSWORD }}
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Test environment variables
       run: |
-        echo ${{ secrets.EMAIL_ID }}
+        echo ${{ secrets.SID_ID }}
         echo ${{ secrets.PASSWORD }}
         
     - name: Set up Python
