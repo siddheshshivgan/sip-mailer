@@ -43,7 +43,6 @@ jobs:
         RAJAN_PASSWORD: ${{ secrets.RAJAN_PASSWORD }}
         RESHMA_ID: ${{ secrets.RESHMA_ID }}
         RESHMA_PASSWORD: ${{ secrets.RESHMA_PASSWORD }}
-    - name: Print secrets (for debugging)
       run: |
         echo ${EMAIL_ID}
         echo ${PASSWORD}
