@@ -88,62 +88,64 @@ accounts = [
 driver.get("https://www.njindiaonline.in/pdesk/login.fin?cmdAction=login")
 
 for acc in accounts:
-    try:
-        # Locate the username and password fields and enter the login details
-        username = driver.find_element(By.NAME, 'partnerId1')
-        password = driver.find_element(By.NAME, 'password1')
-        username.send_keys(str(os.environ.get('SID_ID')))
-        password.send_keys(str(os.environ.get('SID_PASSWORD')))
+    # Locate the username and password fields and enter the login details
+    username = driver.find_element(By.NAME, 'partnerId1')
+    password = driver.find_element(By.NAME, 'password1')
+    username.send_keys(str(os.environ.get('SID_ID')))
+    password.send_keys(str(os.environ.get('SID_PASSWORD')))
+
+    print(driver.find_element(By.NAME, 'partnerId1'))
+    sys.stdout.flush()
+    print(driver.find_element(By.NAME, 'password1'))
+    sys.stdout.flush()
     
-        # Capture the CAPTCHA image
-        captcha_image = driver.find_element(By.ID, 'imgCaptcha')  # Update the XPath
+    # Capture the CAPTCHA image
+    captcha_image = driver.find_element(By.ID, 'imgCaptcha')  # Update the XPath
+
+    # Save the CAPTCHA image
+    captcha_image.screenshot('captcha.png')
+
+    # Use OCR to read the CAPTCHA
+    captcha_text = pytesseract.image_to_string(Image.open('captcha.png')).strip()
+    print(captcha_text)
+    sys.stdout.flush()
+    captcha_text = captcha_text.replace(" ", "")
+
+    # Enter the CAPTCHA text
+    captcha_field = driver.find_element(By.NAME, 'capcode')
+    captcha_field.send_keys(captcha_text)
+
+    # Submit the form
+    driver.find_element(By.NAME, 'action').click()
+    WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.NAME, 'action'))).click()
+    time.sleep(5)
+    WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//a[text()="Stock Exchange"]'))).click()
+    # driver.find_element(By.XPATH, '//a[text()="Stock Exchange"]').click()
+    driver.find_element(By.XPATH, '//b[text()="SIP Status Report"]').click()
+    WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.NAME, 'apply'))).click()
+    # driver.find_element(By.NAME, 'apply').click()
+    time.sleep(3)
+    driver.find_element(By.ID, 'export_xls').click()
+
+    driver.execute_script("window.history.go(-1)")
+    time.sleep(2)
+    driver.find_element(By.XPATH, "//a[@onclick='javascript:getAccountDetail();']").click()
+
+    # Get the current window handle
+    original_window = driver.current_window_handle
+
+    # Wait for the new window or tab
+    WebDriverWait(driver, 3).until(EC.number_of_windows_to_be(2))
+
+    # Loop through until we find a new window handle
+    for window_handle in driver.window_handles:
+        if window_handle != original_window:
+            driver.switch_to.window(window_handle)
+            break
+
+    WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.ID, 'export_xls'))).click()
+    time.sleep(5)
     
-        # Save the CAPTCHA image
-        captcha_image.screenshot('captcha.png')
-    
-        # Use OCR to read the CAPTCHA
-        captcha_text = pytesseract.image_to_string(Image.open('captcha.png')).strip()
-        print(captcha_text)
-        sys.stdout.flush()
-        captcha_text = captcha_text.replace(" ", "")
-    
-        # Enter the CAPTCHA text
-        captcha_field = driver.find_element(By.NAME, 'capcode')
-        captcha_field.send_keys(captcha_text)
-    
-        # Submit the form
-        # driver.find_element(By.NAME, 'action').click()
-        WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.NAME, 'action'))).click()
-        time.sleep(3)
-        WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//a[text()="Stock Exchange"]'))).click()
-        # driver.find_element(By.XPATH, '//a[text()="Stock Exchange"]').click()
-        driver.find_element(By.XPATH, '//b[text()="SIP Status Report"]').click()
-        WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.NAME, 'apply'))).click()
-        # driver.find_element(By.NAME, 'apply').click()
-        time.sleep(3)
-        driver.find_element(By.ID, 'export_xls').click()
-    
-        driver.execute_script("window.history.go(-1)")
-        time.sleep(2)
-        driver.find_element(By.XPATH, "//a[@onclick='javascript:getAccountDetail();']").click()
-    
-        # Get the current window handle
-        original_window = driver.current_window_handle
-    
-        # Wait for the new window or tab
-        WebDriverWait(driver, 3).until(EC.number_of_windows_to_be(2))
-    
-        # Loop through until we find a new window handle
-        for window_handle in driver.window_handles:
-            if window_handle != original_window:
-                driver.switch_to.window(window_handle)
-                break
-    
-        WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.ID, 'export_xls'))).click()
-        time.sleep(5)
-    except Exception as e:
-        print(driver.page_source)
-        sys.stdout.flush()
     # Load the sheets from the provided files
     latest_xls_files = get_latest_xls_files(num_files=2)
     file1_path = latest_xls_files[0].replace("\\","/")
