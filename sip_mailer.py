@@ -112,10 +112,16 @@ for acc in accounts:
 
     # Submit the form
     driver.find_element(By.NAME, 'action').click()
-    print(driver.page_source)
-    sys.stdout.flush()
     time.sleep(3)
-    WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//a[text()="Stock Exchange"]'))).click()
+    try:
+        WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//a[text()="Stock Exchange"]'))).click()
+    except Exception as e:
+        print(driver.page_source)
+        sys.stdout.flush()
+        driver.save_screenshot('screenshot.png')
+        print(f"Screenshot saved as screenshot.png")
+        sys.stdout.flush()
+    
     # driver.find_element(By.XPATH, '//a[text()="Stock Exchange"]').click()
     driver.find_element(By.XPATH, '//b[text()="SIP Status Report"]').click()
     WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.NAME, 'apply'))).click()
