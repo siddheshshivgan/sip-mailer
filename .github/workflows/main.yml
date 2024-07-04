@@ -44,8 +44,8 @@ jobs:
         RESHMA_ID: ${{ secrets.RESHMA_ID }}
         RESHMA_PASSWORD: ${{ secrets.RESHMA_PASSWORD }}
       run: |
-        echo ${EMAIL_ID}
-        echo ${PASSWORD}
+        echo ${{ secrets.EMAIL_ID }}
+        echo ${{ secrets.PASSWORD }}
           
     - name: Run script
       run: python sip_mailer.py
