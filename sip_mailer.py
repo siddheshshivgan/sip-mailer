@@ -111,10 +111,12 @@ for acc in accounts:
     # Submit the form
     driver.find_element(By.NAME, 'action').click()
     time.sleep(3)
-    driver.find_element(By.XPATH, '//a[text()="Stock Exchange"]').click()
+    WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//a[text()="Stock Exchange"]'))).click()
+    # driver.find_element(By.XPATH, '//a[text()="Stock Exchange"]').click()
     driver.find_element(By.XPATH, '//b[text()="SIP Status Report"]').click()
-    driver.find_element(By.NAME, 'apply').click()
-    time.sleep(0.5)
+    WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.NAME, 'apply'))).click()
+    # driver.find_element(By.NAME, 'apply').click()
+    time.sleep(3)
     driver.find_element(By.ID, 'export_xls').click()
 
     driver.execute_script("window.history.go(-1)")
