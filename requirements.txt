@@ -4,5 +4,6 @@ pytesseract
 selenium
 openpyxl
 xlrd
+webdriver_manager
 
 
