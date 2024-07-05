@@ -18,14 +18,13 @@ jobs:
 
     - name: List contents of Downloads folder using Python
       run: |
-        python -c "
-import os
-from pathlib import Path
+        import os
+        from pathlib import Path
 
-downloads_path = Path.home() / 'Downloads'
-if downloads_path.exists() and downloads_path.is_dir():
-    for path in downloads_path.iterdir():
-        print(f'{path} - Size: {path.stat().st_size} bytes - Last Modified: {path.stat().st_mtime}')
-else:
-    print('Downloads folder does not exist.')
-        "
+        downloads_path = Path.home() / 'Downloads'
+        if downloads_path.exists() and downloads_path.is_dir():
+            for path in downloads_path.iterdir():
+                print(f'{path} - Size: {path.stat().st_size} bytes - Last Modified: {path.stat().st_mtime}')
+        else:
+            print('Downloads folder does not exist.')
+      shell: python
