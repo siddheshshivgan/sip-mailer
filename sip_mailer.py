@@ -116,8 +116,6 @@ for acc in accounts:
 
     # Use OCR to read the CAPTCHA
     captcha_text = pytesseract.image_to_string(Image.open('captcha.png')).strip()
-    print(captcha_text)
-    sys.stdout.flush()
     captcha_text = captcha_text.replace(" ", "")
 
     # Enter the CAPTCHA text
@@ -142,10 +140,13 @@ for acc in accounts:
     time.sleep(3)
     element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//a[@onclick='javascript:getAccountDetail();']")))
     element.click()
+    time.sleep(3)
     # WebDriverWait(driver, 10).until(EC.presence_of_element_located(By.XPATH, "//a[@onclick='javascript:getAccountDetail();']")).click()
 
     # Get the current window handle
     original_window = driver.current_window_handle
+    print(driver.current_window_handle)
+    sys.stdout.flush()
 
     # Wait for the new window or tab
     WebDriverWait(driver, 10).until(EC.number_of_windows_to_be(2))
