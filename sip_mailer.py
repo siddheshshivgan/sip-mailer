@@ -60,7 +60,7 @@ def send_email(to_address, subject, body):
     
 # Function to get xls file paths
 def get_latest_xls_files(num_files=2):
-    for path in downloads_path.iterdir():
+    for path in downloads_dir.iterdir():
         print(f'{path} - Size: {path.stat().st_size} bytes - Last Modified: {path.stat().st_mtime}')
         sys.stdout.flush()
     # Construct the path to the Downloads folder
