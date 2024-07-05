@@ -29,6 +29,10 @@ downloads_dir = home_dir / "Downloads"
 pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files/Tesseract-OCR/tesseract.exe'
 
 chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--window-size=1920,1080")  # Ensure a standard window size
 
 # Create a new instance of the Chrome driver
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
@@ -137,6 +141,8 @@ for acc in accounts:
     element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//a[@onclick='javascript:getAccountDetail();']")))
     element.click()
     time.sleep(3)
+    driver.close()
+    driver.switch_to.window(driver.window_handles[1])
     print(driver.window_handles)
     sys.stdout.flush()
     # WebDriverWait(driver, 10).until(EC.presence_of_element_located(By.XPATH, "//a[@onclick='javascript:getAccountDetail();']")).click()
