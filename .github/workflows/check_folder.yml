@@ -1,0 +1,30 @@
+name: Check Downloads Folder
+
+on: 
+ workflow_dispatch:
+ 
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: List contents of Downloads folder using Python
+      run: |
+        import os
+        from pathlib import Path
+
+        downloads_path = Path.home() / 'Downloads'
+        if downloads_path.exists() and downloads_path.is_dir():
+            for path in downloads_path.iterdir():
+                print(f'{path} - Size: {path.stat().st_size} bytes - Last Modified: {path.stat().st_mtime}')
+        else:
+            print('Downloads folder does not exist.')
+      shell: python

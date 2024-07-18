@@ -66,6 +66,8 @@ def send_email(to_address, subject, body):
 def get_latest_xls_files(num_files=3):
     # Construct the path to the Downloads folder
     downloads_path = os.path.expanduser(downloads_dir)
+    print(downloads_path)
+    sys.stdout.flush()
 
     # Search for .xls files in the Downloads folder
     search_pattern = os.path.join(downloads_path, '*.xls')
