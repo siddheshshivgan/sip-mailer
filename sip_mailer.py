@@ -112,20 +112,20 @@ accounts = [
         "id": os.environ.get('SID_ID'),
         "password": os.environ.get('SID_PASSWORD')
     },
-    # {
-    #     "name": "RAJAN",
-    #     "id": os.environ.get('RAJAN_ID'),
-    #     "password": os.environ.get('RAJAN_PASSWORD')
-    # },
-    # {
-    #     "name": "RESHMA",
-    #     "id": os.environ.get('RESHMA_ID'),
-    #     "password": os.environ.get('RESHMA_PASSWORD')
-    # }
+    {
+        "name": "RAJAN",
+        "id": os.environ.get('RAJAN_ID'),
+        "password": os.environ.get('RAJAN_PASSWORD')
+    },
+    {
+        "name": "RESHMA",
+        "id": os.environ.get('RESHMA_ID'),
+        "password": os.environ.get('RESHMA_PASSWORD')
+    }
 ]
 
 # Navigate to the login page
-driver.get('https://www.njindiaonline.in/pdesk/login.fin?cmdAction=login')
+driver.get(os.environ.get('PARTNER_DESK'))
 
 for acc in accounts:
     login(acc['id'],acc['password'])
