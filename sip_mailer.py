@@ -125,7 +125,7 @@ accounts = [
 ]
 
 # Navigate to the login page
-driver.get(os.environ.get('PARTNER_DESK'))
+driver.get('https://www.njindiaonline.in/pdesk/login.fin?cmdAction=login')
 
 for acc in accounts:
     login(acc['id'],acc['password'])
