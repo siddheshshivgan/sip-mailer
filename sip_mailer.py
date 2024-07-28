@@ -138,7 +138,7 @@ for acc in accounts:
 
     WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//a[text()="Stock Exchange"]'))).click()
     WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//b[text()="Stock Exchange Transaction Report - Mutual Fund"]'))).click()
-    time.sleep(5)
+    time.sleep(10)
     # Enter the from date
     from_date = driver.find_element(By.NAME, 'from_date')
     from_date.clear()
@@ -247,11 +247,15 @@ for acc in accounts:
     lumpsum_merged_sheet = pd.read_excel(output_path1)
 
     # remove comma formatting, filter df for amt > 10000 and revert formatting
-    lumpsum_merged_sheet['Investment Amt'] = lumpsum_merged_sheet['Investment Amt'].str.replace(',', '').astype(float)
-    lumpsum_merged_sheet = lumpsum_merged_sheet[lumpsum_merged_sheet['Investment Amt'] >= 10000]
-    lumpsum_merged_sheet = lumpsum_merged_sheet.reset_index(drop=True)
-    lumpsum_merged_sheet['Investment Amt'] = lumpsum_merged_sheet['Investment Amt'].apply(lambda x: '{:,.2f}'.format(x))
-    print(lumpsum_merged_sheet['Investment Amt'])
+    lumpsum_merged_sheet.fillna(0, inplace=True)
+    if lumpsum_merged_sheet['Investment Amt'][0] == 0:
+        lumpsum_merged_sheet.drop(lumpsum_merged_sheet.head(1).index,inplace=True)
+    else:
+        lumpsum_merged_sheet['Investment Amt'] = lumpsum_merged_sheet['Investment Amt'].str.replace(',', '').astype(float)
+        lumpsum_merged_sheet = lumpsum_merged_sheet[lumpsum_merged_sheet['Investment Amt'] >= 10000]
+        lumpsum_merged_sheet = lumpsum_merged_sheet.reset_index(drop=True)
+        lumpsum_merged_sheet['Investment Amt'] = lumpsum_merged_sheet['Investment Amt'].apply(lambda x: '{:,.2f}'.format(x))
+        print(lumpsum_merged_sheet['Investment Amt'])
 
     # Count the occurrences of each Investor
     sip_investor_counts = sip_merged_sheet['Investor'].value_counts()
