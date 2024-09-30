@@ -136,6 +136,9 @@ for acc in accounts:
         login(acc['id'],acc['password'])
         time.sleep(10)
 
+    if 'popupClose' in driver.page_source:
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'popupClose'))).click()
+
     WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//a[text()="Stock Exchange"]'))).click()
     WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//b[text()="Stock Exchange Transaction Report - Mutual Fund"]'))).click()
     time.sleep(10)
@@ -161,6 +164,10 @@ for acc in accounts:
     time.sleep(5)
     driver.execute_script("window.history.go(-1)")
     time.sleep(3)
+
+    if 'popupClose' in driver.page_source:
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'popupClose'))).click()
+
     WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//a[text()="Stock Exchange"]'))).click()
     # driver.find_element(By.XPATH, '//a[text()="Stock Exchange"]').click()
     driver.find_element(By.XPATH, '//b[text()="SIP Status Report"]').click()
@@ -172,6 +179,10 @@ for acc in accounts:
     time.sleep(5)
     driver.execute_script("window.history.go(-1)")
     time.sleep(3)
+
+    if 'popupClose' in driver.page_source:
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'popupClose'))).click()
+
     element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//a[@onclick='javascript:getAccountDetail();']")))
     element.click()
     time.sleep(3)
