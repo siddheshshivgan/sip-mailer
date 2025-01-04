@@ -262,7 +262,7 @@ for acc in accounts:
     if lumpsum_merged_sheet['Investment Amt'][0] == 0:
         lumpsum_merged_sheet.drop(lumpsum_merged_sheet.head(1).index,inplace=True)
     else:
-        lumpsum_merged_sheet['Investment Amt'] = lumpsum_merged_sheet['Investment Amt'].str.replace(',', '').astype(float)
+        lumpsum_merged_sheet['Investment Amt'] = lumpsum_merged_sheet['Investment Amt'].astype(str).str.replace(',', '').astype(float)
         lumpsum_merged_sheet = lumpsum_merged_sheet[lumpsum_merged_sheet['Investment Amt'] >= 10000]
         lumpsum_merged_sheet = lumpsum_merged_sheet.reset_index(drop=True)
         lumpsum_merged_sheet['Investment Amt'] = lumpsum_merged_sheet['Investment Amt'].apply(lambda x: '{:,.2f}'.format(x))
