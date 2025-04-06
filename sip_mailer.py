@@ -136,8 +136,8 @@ for acc in accounts:
         login(acc['id'],acc['password'])
         time.sleep(10)
 
-    if 'popupClose' in driver.page_source:
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'popupClose'))).click()
+    if 'popupCloseButton' in driver.page_source:
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'popupCloseButton'))).click()
 
     WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//a[text()="Stock Exchange"]'))).click()
     WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//b[text()="Stock Exchange Transaction Report - Mutual Fund"]'))).click()
