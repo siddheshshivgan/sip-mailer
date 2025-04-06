@@ -165,8 +165,8 @@ for acc in accounts:
     driver.execute_script("window.history.go(-1)")
     time.sleep(3)
 
-    if 'popupClose' in driver.page_source:
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'popupClose'))).click()
+    if 'popupCloseButton' in driver.page_source:
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'popupCloseButton'))).click()
 
     WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//a[text()="Stock Exchange"]'))).click()
     # driver.find_element(By.XPATH, '//a[text()="Stock Exchange"]').click()
