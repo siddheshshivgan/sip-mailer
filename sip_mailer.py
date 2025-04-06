@@ -180,9 +180,6 @@ for acc in accounts:
     driver.execute_script("window.history.go(-1)")
     time.sleep(3)
 
-    if 'popupClose' in driver.page_source:
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'popupClose'))).click()
-
     element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//a[@onclick='javascript:getAccountDetail();']")))
     element.click()
     time.sleep(3)
