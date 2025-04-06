@@ -107,11 +107,11 @@ def login(user_id,pwd):
     # WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, 'action'))).click()
 
 accounts = [
-    # {
-    #     "name": "SID",
-    #     "id": os.environ.get('SID_ID'),
-    #     "password": os.environ.get('SID_PASSWORD')
-    # },
+    {
+        "name": "SID",
+        "id": os.environ.get('SID_ID'),
+        "password": os.environ.get('SID_PASSWORD')
+    },
     {
         "name": "RAJAN",
         "id": os.environ.get('RAJAN_ID'),
